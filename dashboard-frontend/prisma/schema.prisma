@@ -1,0 +1,24 @@
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  role      String   // manager | designer
+  createdAt DateTime @default(now())
+  tasks     Task[]
+}
+
+model Task {
+  id           Int      @id @default(autoincrement())
+  requestDate  DateTime
+  taskTitle    String
+  principal    String
+  medium       String
+  imageCount   Int      @default(0)
+  videoCount   Int      @default(0)
+  requestedBy  String
+  priority     String
+  status       String
+  assignedTo   Int?
+  assignee     User?    @relation(fields: [assignedTo], references: [id])
+  createdAt    DateTime @default(now())
+}
